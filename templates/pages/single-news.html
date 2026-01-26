@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row mt-5">
+    <!-- col -->
+    <div class="col-lg-8">
+        <div class="container">
+            
+            <div class="card-body">
+                <h5 class="card-title">{{ news.title   }}</h5>
+                <div class="imgBlock" style="height: 420px;">
+                <img style="height: 100%; object-fit: cover;" src="{{ news.image.url }}" class="card-img-top" alt="...">
+            </div>
+                <p class="card-text">{{ news.description|safe }}</p>
+                <p class="card-text">Выпущено: {{ news.public_date }} | <b>Изменено: {{ news.update_date }}</b></p>
+                <a href="{% url 'single_news' news.slug %}" class="btn btn-primary">Подробнее</a>
+            </div>
+        </div>
+    </div>
+    <!-- col -->
+    <div class="col-lg-4">
+        <h4>Комментарии</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.name}}
+            {{form.text}}
+            <!-- <input class="form-control mt-2" type="text" name="" id="" placeholder="Имя фамилие">
+            <textarea class="form-control mt-2" name="" id="" placeholder="Комментарии"></textarea> -->
+            <button class="btn btn-primary mt-2" type="submit">Отправить</button>
+        </form>
+        <!-- com -->
+        <div class="comments">
+            {% for comment in comments %}
+                <p>
+                    {{comment.name}} <b>{{comment.created_at}}</b>
+                </p>
+                <p>{{comment.text}}</p>
+            {% endfor %}
+        </div>
+        <!-- com -->
+    </div>
+    <!-- col -->
+</div>
+{% endblock content %}

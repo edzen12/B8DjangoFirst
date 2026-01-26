@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- news -->
+    <div class="container">
+        <h2>Backend 8 группа</h2>
+        <div class="row">
+            <!-- col -->
+            {% for news in news_all %}
+            <div class="col-lg-3 col-6">
+                <div class="card">
+                    <div class="imgBlock" style="height: 220px;">
+                        <img style="height: 100%; object-fit: cover;" src="{{ news.image.url }}" class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.title|truncatewords:8  }}</h5>
+                        <p class="card-text">{{ news.description|truncatewords:10|safe }}</p>
+                        <p class="card-text">Выпущено: {{ news.public_date }} | <b>Изменено: {{ news.update_date }}</b></p>
+                        <a href="{% url 'single_news' news.slug %}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div> 
+            </div>
+            {% endfor %}
+            <!-- col -->
+        </div>
+    </div>
+    <!-- news -->
+{% endblock content %}
+
+
+    
+
+    

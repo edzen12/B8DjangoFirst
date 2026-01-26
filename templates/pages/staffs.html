@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- news -->
+    <div class="container">
+        <h2>Сотрудники нашей компании</h2>
+        <div class="row">
+            <!-- col -->
+            {% for staff in staffs %}
+            <div class="col-lg-3 col-6">
+                <div class="card"> 
+                    <div class="card-body">
+                        <h5 class="card-title">{{ staff.fullname  }}</h5>
+                        <p class="card-text">{{ staff.age }}Лет | Стаж: {{staff.experience}}год</p> 
+                        <p class="card-text">{{ staff.position }}</p> 
+                    </div>
+                </div> 
+            </div>
+            {% endfor %}
+            <!-- col -->
+        </div>
+    </div>
+    <!-- news -->
+{% endblock content %}
+
+
+    
+
+    

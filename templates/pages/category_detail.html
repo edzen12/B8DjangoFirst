@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center">{{category.title}}</h2>
+    <div class="row">
+        {% for new in news %}
+        <div class="col-lg-4">
+            <div class="imgBlock" style="height: 420px;">
+                    <img style="height: 100%; object-fit: cover;" src="{{ new.image.url }}" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ new.title   }}</h5>
+                    <p class="card-text">{{ new.description|truncatewords:10|safe }}</p>
+                    <p class="card-text">Выпущено: {{ new.public_date }} | <b>Изменено: {{ news.update_date }}</b></p>
+                    <a href="{% url 'single_news' new.slug %}" class="btn btn-primary">Подробнее</a>
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
