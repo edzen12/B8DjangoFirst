@@ -16,6 +16,9 @@ class About(models.Model):
 
 class Staff(models.Model):
     fullname = models.CharField(max_length=100, verbose_name="ФИО")
+    image = models.ImageField(
+        upload_to='staff/', verbose_name="Фото", null=True
+    )
     position = models.CharField(max_length=80, verbose_name="Должность")
     age = models.IntegerField(verbose_name="Возраст")
     experience=models.IntegerField(verbose_name="Стаж работы (лет)")

@@ -9,6 +9,11 @@
             <div class="col-lg-3 col-6">
                 <div class="card"> 
                     <div class="card-body">
+                        {% if staff.image %}
+                            <img class="img-thumbnail" src="{{staff.image.url}}" alt="">
+                        {% else %}
+                            <img class="img-thumbnail" src="https://i.pinimg.com/564x/4f/9b/61/4f9b611e72d038a4e8176709de0913d4.jpg" alt="">
+                        {% endif %}
                         <h5 class="card-title">{{ staff.fullname  }}</h5>
                         <p class="card-text">{{ staff.age }}Лет | Стаж: {{staff.experience}}год</p> 
                         <p class="card-text">{{ staff.position }}</p> 
