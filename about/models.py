@@ -28,3 +28,19 @@ class Staff(models.Model):
     
     class Meta:
         verbose_name_plural = 'Сотрудниках'
+
+
+class SocialLink(models.Model):
+    employee = models.ForeignKey(
+        Staff, verbose_name="Сотрудник", on_delete=models.CASCADE
+    )
+    title = models.CharField(verbose_name="Название соцсети", max_length=30)
+    link = models.CharField(verbose_name="ссылка на соцсеть", max_length=255)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = 'Соцсети'
+        verbose_name = 'соцсеть'
+

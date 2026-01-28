@@ -17,6 +17,11 @@
                         <h5 class="card-title">{{ staff.fullname  }}</h5>
                         <p class="card-text">{{ staff.age }}Лет | Стаж: {{staff.experience}}год</p> 
                         <p class="card-text">{{ staff.position }}</p> 
+                        {% if staff.sociallink_set.all %}
+                            {% for social in staff.sociallink_set.all %}
+                                <a target="_blank" href="{{social.link}}">{{social.title}}</a>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div> 
             </div>

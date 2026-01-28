@@ -14,7 +14,7 @@ def about(request):
 
 
 def staff(request):
-    staffs = Staff.objects.all()
+    staffs = Staff.objects.prefetch_related('sociallink_set')
     category_all = Category.objects.filter(news__isnull=False).distinct()
     context = {
         'category_all':category_all,
