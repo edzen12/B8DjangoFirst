@@ -14,7 +14,7 @@
                         {% else %}
                             <img class="img-thumbnail" src="https://i.pinimg.com/564x/4f/9b/61/4f9b611e72d038a4e8176709de0913d4.jpg" alt="">
                         {% endif %}
-                        <h5 class="card-title">{{ staff.fullname  }}</h5>
+                        <h5 class="card-title"><a href="{% url 'single_staff' staff.slug %}">{{ staff.fullname  }}</a></h5>
                         <p class="card-text">{{ staff.age }}Лет | Стаж: {{staff.experience}}год</p> 
                         <p class="card-text">{{ staff.position }}</p> 
                         {% if staff.sociallink_set.all %}

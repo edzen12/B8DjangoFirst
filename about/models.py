@@ -22,6 +22,7 @@ class Staff(models.Model):
     position = models.CharField(max_length=80, verbose_name="Должность")
     age = models.IntegerField(verbose_name="Возраст")
     experience=models.IntegerField(verbose_name="Стаж работы (лет)")
+    slug = models.SlugField(unique=True, null=True)
 
     def __str__(self):
         return f"{self.fullname} - {self.position}"

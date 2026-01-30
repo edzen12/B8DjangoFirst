@@ -11,6 +11,7 @@ class SocialLinkInline(admin.TabularInline):
 class StaffAdmin(admin.ModelAdmin):
     list_display = ['fullname', 'position']
     inlines = [SocialLinkInline,]
+    prepopulated_fields = {'slug':['fullname']}
 
 
 admin.site.register(About)  

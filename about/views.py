@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from about.models import About, Staff
 from news.models import Category
 
@@ -22,3 +22,14 @@ def staff(request):
     }
     return render(request, 'pages/staffs.html', context)
 
+
+
+def single_staff(request, slug):
+    staff = get_object_or_404(Staff, slug=slug)
+    category_all = Category.objects.filter(news__isnull=False).distinct() 
+
+    context = {
+        'category_all': category_all,
+        'staff': staff, 
+    }
+    return render(request, 'pages/single-staff.html', context)

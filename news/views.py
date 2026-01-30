@@ -52,7 +52,7 @@ def single_news(request, slug):
         'comments':comments,
         'form':form
     }
-    return render(request, 'single-news.html', context)
+    return render(request, 'pages/single-news.html', context)
 
 
 def category_detail(request, slug):

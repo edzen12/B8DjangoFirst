@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row mt-5">
+    <!-- col -->
+    <div class="col-lg-8">
+        <div class="container">
+            
+            <div class="card-body">
+                <h5 class="card-title">{{ staff.fullname   }}</h5>
+                <div class="imgBlock" style="height: 420px;">
+                <img style="height: 100%; object-fit: cover;" src="{{ staff.image.url }}" class="card-img-top" alt="...">
+            </div>
+                <p class="card-text">{{ staff.position }}</p>
+                <p class="card-text">Опыт: {{ staff.experience }} | <b>Возраст: {{ staff.age }}</b></p>
+                {% if staff.sociallink_set.all %}
+                    {% for social in staff.sociallink_set.all %}
+                        <a target="_blank" href="{{social.link}}">{{social.title}}</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- col -->
+    <div class="col-lg-4">
+        
+    </div>
+    <!-- col -->
+</div>
+{% endblock content %}
