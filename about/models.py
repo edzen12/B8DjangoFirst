@@ -31,6 +31,22 @@ class Staff(models.Model):
         verbose_name_plural = 'Сотрудниках'
 
 
+class ImagesStaff(models.Model):
+    employee = models.ForeignKey(
+        Staff, verbose_name="Сотрудник", on_delete=models.CASCADE
+    )
+    title = models.CharField(verbose_name="Название фото", max_length=30)
+    image = models.ImageField(verbose_name="Фото", upload_to='imagesStaff/')
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name_plural = 'Дополнительные фотографии'
+        verbose_name = 'доп фото'
+
+
+
 class SocialLink(models.Model):
     employee = models.ForeignKey(
         Staff, verbose_name="Сотрудник", on_delete=models.CASCADE
