@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from news.models import News, Category, Comment
+from django.core.paginator import Paginator
+from news.models import News, Category
 from django.db.models import Q
 from news.forms import CommentForm 
 from django.shortcuts import redirect
@@ -25,9 +26,14 @@ def search(request):
 def news(request):
     news_all = News.objects.all()
     category_all = Category.objects.filter(news__isnull=False).distinct()
+
+    paginator = Paginator(news_all, 4)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
         'category_all':category_all,
-        'news_all': news_all,
+        'page_obj': page_obj,
     }
     return render(request, 'news.html', context)
 
