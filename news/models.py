@@ -1,5 +1,6 @@
 from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -43,10 +44,10 @@ class Comment(models.Model):
         News, on_delete=models.CASCADE, 
         related_name='comments'
     )
-    name = models.CharField(max_length=50, verbose_name="Имя")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     text = models.TextField(verbose_name="Комментарии")
     created_at = models.DateTimeField(auto_now_add=True)
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.name} {self.text}"
+        return f"{self.user.username} {self.text}"

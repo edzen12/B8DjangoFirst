@@ -14,7 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'news', 'is_published', 'created_at']
+    list_display = ['news', 'is_published', 'created_at']
     list_filter = ('is_published',)
     list_editable = ('is_published',)
  

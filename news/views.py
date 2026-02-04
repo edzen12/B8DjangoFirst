@@ -1,9 +1,25 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.core.paginator import Paginator
 from news.models import News, Category
 from django.db.models import Q
-from news.forms import CommentForm 
-from django.shortcuts import redirect
+from news.forms import CommentForm  
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'pages/register.html', context)
 
 
 def search(request):
@@ -43,12 +59,15 @@ def single_news(request, slug):
     comments = news.comments.filter(is_published=True).order_by('-created_at')
 
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect('login')
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.news = news
+            comment.user = request.user
             comment.save()
-            return redirect('pages/single_news', slug=slug)
+            return redirect(request.path)
     else:
         form=CommentForm()
 
@@ -59,7 +78,6 @@ def single_news(request, slug):
         'form':form
     }
     return render(request, 'pages/single-news.html', context)
-
 
 def category_detail(request, slug):
     category = get_object_or_404(Category, slug=slug)

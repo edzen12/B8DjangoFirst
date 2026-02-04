@@ -19,25 +19,32 @@
     <!-- col -->
     <div class="col-lg-4">
         <h4>Комментарии</h4>
+        {% if user.is_authenticated %}
         <form method="POST">
-            {% csrf_token %}
-            {{form.name}}
-            {{form.text}}
-            <!-- <input class="form-control mt-2" type="text" name="" id="" placeholder="Имя фамилие">
-            <textarea class="form-control mt-2" name="" id="" placeholder="Комментарии"></textarea> -->
+            {% csrf_token %} 
+            {{form.text}} 
             <button class="btn btn-primary mt-2" type="submit">Отправить</button>
         </form>
+        {% else %}
+        <p>чтобы оставить комментарии надо
+            <a class="btn btn-primary" href="{% url 'login' %}">Войдите</a> или
+            <a class="btn btn-success" href="{% url 'register' %}">Зарегистрируйтесь</a>
+        </p>
+        {% endif %}
         <!-- com -->
-        <div class="comments">
+        
+        <div class="comments mt-5">
             {% for comment in comments %}
+            <p style="border: 1px dotted red;">
                 <p>
-                    {{comment.name}} <b>{{comment.created_at}}</b>
+                    {{comment.user.username}} <b>{{comment.created_at}}</b>
                 </p>
                 <p>{{comment.text}}</p>
+            </p>
             {% endfor %}
         </div>
         <!-- com -->
-    </div>
+    </div> 
     <!-- col -->
 </div>
 {% endblock content %}
