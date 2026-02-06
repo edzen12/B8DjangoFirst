@@ -16,6 +16,10 @@ class Category(models.Model):
         verbose_name = 'категория'
 
 class News(models.Model):
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, 
+        verbose_name="Автор", null=True
+    )
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE,
         null=True, verbose_name="Категория"

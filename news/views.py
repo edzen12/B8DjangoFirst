@@ -1,10 +1,43 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.core.paginator import Paginator
 from news.models import News, Category
 from django.db.models import Q
-from news.forms import CommentForm  
+from django.utils.text import slugify
+from news.forms import CommentForm, NewsCreateForm 
+
+
+@login_required # если не авторизован, автоматом перекидывает на login.html
+def create_news(request):
+    if request.method == 'POST':
+        form = NewsCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            news = form.save(commit=False)
+            news.author = request.user
+            news.slug = slugify(news.title)
+            news.save()
+            return redirect('single_news', slug=news.slug)
+    else:
+        form = NewsCreateForm()
+    category_all = Category.objects.filter(news__isnull=False).distinct()
+    context = {
+        'form':form,
+        'category_all':category_all,
+    }
+    return render(request, 'pages/create-news.html', context)
+
+
+@login_required
+def profile(request):
+    user_news = News.objects.filter(author=request.user)
+    category_all = Category.objects.filter(news__isnull=False).distinct()
+    context = {
+        'user_news':user_news,
+        'category_all':category_all,
+    }
+    return render(request, 'pages/profile.html', context)
 
 
 def register(request):

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2>Профиль: {{ user.username }}</h2>
+
+    <a href="{% url 'create_news' %}" class="btn btn-success mb-3">
+        Добавить новость
+    </a>
+
+    <h4>Мои новости</h4>
+    {% for news in user_news %}
+        <div>
+            <a href="{% url 'single_news' news.slug %}">
+                {{ news.title }}
+            </a>
+        </div>
+    {% empty %}
+        <p>Новостей пока нет</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
