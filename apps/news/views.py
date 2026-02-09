@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.core.paginator import Paginator
-from news.models import News, Category
 from django.db.models import Q
 from django.utils.text import slugify
-from news.forms import CommentForm, NewsCreateForm 
+from apps.news.models import News, Category
+from apps.news.forms import CommentForm, NewsCreateForm 
 
 
 @login_required # если не авторизован, автоматом перекидывает на login.html

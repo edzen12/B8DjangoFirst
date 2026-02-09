@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from contact.models import Contact
+from apps.contact.models import Contact
 
 
 def contact_page(request):

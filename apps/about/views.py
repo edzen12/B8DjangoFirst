@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from about.models import About, Staff
-from news.models import Category
+from apps.about.models import About, Staff
+from apps.news.models import Category
 
 
 def about(request):

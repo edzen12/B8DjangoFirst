@@ -8,7 +8,8 @@
 #### в нем открываем терминал и пишем:
 #### python -m venv venv
 #### .\venv\Scripts\activate
-#### pip install django pillow django-ckeditor-5
+#### pip install django pillow django-ckeditor-5 requests
+#### python manage.py makemigrations
 #### python manage.py migrate
 #### python manage.py createsuperuser
 #### python manage.py runserver

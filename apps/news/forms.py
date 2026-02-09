@@ -1,5 +1,5 @@
 from django import forms 
-from news.models import Comment, News
+from apps.news.models import Comment, News
 
 
 class CommentForm(forms.ModelForm):

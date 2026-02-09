@@ -1,5 +1,5 @@
 from django.urls import path
-from news.views import (news, single_news, category_detail,
+from apps.news.views import (news, single_news, category_detail,
                          search, register, profile, create_news)
 from django.contrib.auth import views as auth_views
 
